@@ -1,0 +1,12 @@
+DocumentIdentifier, FileOrder, X, Y, Width, Height, MarkupType, FillA, FillR, FillG, FillB, BorderSize, BorderA, BorderR, BorderG, BorderB, BorderStyle, FontName, FontA, FontR, FontG, FontB, FontSize, FontStyle, Text, ZOrder, DrawCrossLines, MarkupSubType, X_d, Y_d, Width_d, Height_d
+abcdef, 0, 93, 52, 125, 92, 1, 255, 0, 0, 0, null, null, null, null, null, null, ,	null, null, null, null, null, null, , 0, 0, 1, 93.1, 52.1, 125.1, 92.1
+abcdef, 0, 263, 141, 245, 149, 1, 255, 255, 255, 255, 3, 255, 0, 0, 0, 5, , null, null, null, null, null, null, , 0, 1, 4, 263.1, 141.1, 245.1, 149.1
+abcdef, 0, 176, 335, 253, 210, 1, 255, 255, 255, 255, 3, 255, 0, 0, 0, 5, Arial, 255, 0, 0, 0, -1, 2, text, 0, 0, 3, 176.1, 335.1, 253.1, 210.1
+abcdef, 0, 481, 45, 317, 101, 1, 255, 255, 255, 255, null, null, null, null, null, null, , null, null, null, null, null, null, , 0, 0, 5, 481.1, 45.1, 317.1, 101.1
+abcdef, 0, 28, 25, 837, 756, 1, 255, 255, 255, 255, null, null, null, null, null, null, , null, null, null, null, null, null, , -2147483648, 0, 6, 28.1, 25.1, 837.1, 756.1
+abcdef, 0, 84, 568, 138, 80, 2, 110, 255, 137, 157, null, null, null, null, null, null, , null, null, null, null, null, null, , 0, 0, 10, 84.1, 568.1, 138.1, 80.1
+abcdef, 0, 258, 572, 197, 75, 2, 110, 255, 165, 0, null, null, null, null, null, null, , null, null, null, null, null, null, , 0, 0, 9, 258.1, 572.1, 197.1, 75.1
+abcdef, 0, 485, 560, 234, 90, 2, 110, 255, 255, 0, null, null, null, null, null, null, , null, null, null, null, null, null, , 0, 0, 2, 485.1, 560.1, 234.1, 90.1
+abcdef, 0, 476, 468, 289, 117, 2, 110, 128, 255, 128, null, null, null, null, null, null, , null, null, null, null, null, null, , 0, 0, 7, 476.1, 468.1, 289.1, 117.1
+abcdef, 0, 64, 693, 532, 44, 2, 110, 27, 161, 226, null, null, null, null, null, null, , null, null, null, null, null, null, , 0, 0, 8, 64.1, 693.1, 532.1, 44.1
+abcdef, 0, 559, 189, 189, 263, 2, 110, 162, 0, 255, null, null, null, null, null, null, , null, null, null, null, null, null, , 0, 0, 11, 559.1, 189.1, 189.1, 263.1
