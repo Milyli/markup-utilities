@@ -1,5 +1,5 @@
 # markup-utilities
-Project Champion - [Language.ai](http://language.ai/), Relativity Application: 
+Project Champion - [Language.ai](http://language.ai/):  This Relativity Application allows the end user to import and export redactions into a Workspace.  The export functionality writes redactions to a file which can then be used by the import functionality to import redactions into the same workspace (for a different Markup Set), a different Workspace in the same environment or a Workspace in a completely different environment.
 
 While this is an open source project on the kCura GitHub account, support is only available through through the Relativity developer community. You are welcome to use the code and solution as you see fit within the confines of the license it is released under. However, if you are looking for support or modifications to the solution, we suggest reaching out to the Project Champion listed below.
 
