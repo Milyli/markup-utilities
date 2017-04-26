@@ -633,8 +633,9 @@ namespace MarkupUtilities.Agents.NUnit
           It.IsAny<IServicesMgr>(),
           It.IsAny<ExecutionIdentity>(),
           It.IsAny<int>(),
-          It.IsAny<Guid>(),
-          It.IsAny<int>()))
+          It.IsAny<int>(),
+          It.IsAny<int>(),
+          It.IsAny<string>()))
         .Returns(Task.FromResult(streamReader))
         .Verifiable();
     }
@@ -834,8 +835,9 @@ namespace MarkupUtilities.Agents.NUnit
           It.IsAny<IServicesMgr>(),
           It.IsAny<ExecutionIdentity>(),
           It.IsAny<int>(),
-          It.IsAny<Guid>(),
-          It.IsAny<int>()),
+          It.IsAny<int>(),
+          It.IsAny<int>(),
+          It.IsAny<string>()),
           Times.Exactly(timesCalled));
     }
 

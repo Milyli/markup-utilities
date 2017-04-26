@@ -139,6 +139,11 @@ namespace MarkupUtilities.Agents
       _errorContext = $"[WorkspaceArtifactId = {WorkspaceArtifactId}, ImportJobArtifactId = {importManagerQueueRecord.ImportJobArtifactId}]";
       RaiseMessage($"Validating import job. {_errorContext}");
 
+      //Set temporary file path to download file
+      var tempFileName = $"MarkupUtilitiesImportFile_{Guid.NewGuid()}.csv";
+      var temporaryDirectory = GetTemporaryDirectory();
+      var tempFileLocation = Path.Combine(temporaryDirectory, tempFileName);
+
       try
       {
         //retrieve import job
@@ -148,7 +153,7 @@ namespace MarkupUtilities.Agents
         await UpdateImportJobStatusAndDetailsFieldAsync(Constant.Status.Job.VALIDATING, string.Empty);
 
         //read contents of the import job file
-        var fileContentsStream = await ReadImportJobFileContentsAsync();
+        var fileContentsStream = await ReadImportJobFileContentsAsync(tempFileLocation);
 
         //validate contents of the import job file
         await ValidateImportJobFileContentsAsync(fileContentsStream);
@@ -168,6 +173,19 @@ namespace MarkupUtilities.Agents
         //log error
         await LogErrorAsync(ex);
       }
+      finally
+      {
+        //Delete temp file
+        if (File.Exists(tempFileLocation))
+        {
+          File.Delete(tempFileLocation);
+        }
+
+        if (Directory.Exists(temporaryDirectory))
+        {
+          Directory.Delete(temporaryDirectory);
+        }
+      }
 
       RaiseMessage($"Validated import job. {_errorContext}");
     }
@@ -176,6 +194,11 @@ namespace MarkupUtilities.Agents
     {
       _errorContext = $"[WorkspaceArtifactId = {WorkspaceArtifactId}, ImportJobArtifactId = {importManagerQueueRecord.ImportJobArtifactId}]";
       RaiseMessage($"Processing import job. {_errorContext}");
+
+      //Set temporary file path to download file
+      var tempFileName = $"MarkupUtilitiesImportFile_{Guid.NewGuid()}.csv";
+      var temporaryDirectory = GetTemporaryDirectory();
+      var tempFileLocation = Path.Combine(temporaryDirectory, tempFileName);
 
       try
       {
@@ -189,7 +212,7 @@ namespace MarkupUtilities.Agents
         await UpdateImportJobStatusAndDetailsFieldAsync(Constant.Status.Job.IN_PROGRESS_MANAGER, string.Empty);
 
         //read contents of the import job file
-        var fileContentsStream = await ReadImportJobFileContentsAsync();
+        var fileContentsStream = await ReadImportJobFileContentsAsync(tempFileLocation);
 
         //parse import job file for contents
         await ParseImportJobFileContentsAsync(fileContentsStream);
@@ -216,6 +239,17 @@ namespace MarkupUtilities.Agents
       {
         //drop import manager holding table
         await DropImportManagerHoldingTableAsync();
+
+        //Delete temp file
+        if (File.Exists(tempFileLocation))
+        {
+          File.Delete(tempFileLocation);
+        }
+
+        if (Directory.Exists(temporaryDirectory))
+        {
+          Directory.Delete(temporaryDirectory);
+        }
       }
 
       RaiseMessage($"Processed import job. {_errorContext}");
@@ -265,16 +299,20 @@ namespace MarkupUtilities.Agents
       await ImportFileParser.ValidateFileContentsAsync(fileContentsStream);
     }
 
-    private async Task<StreamReader> ReadImportJobFileContentsAsync()
+    private async Task<StreamReader> ReadImportJobFileContentsAsync(string tempFileLocation)
     {
       RaiseMessage($"Reading contents of import file for import job. {_errorContext}");
 
+      //Obtain ArtifactID of File Field on Markup Utility File object
+      var markupFileFieldArtifactId = await QueryHelper.GetArtifactIdByGuidAsync(AgentHelper.GetDBContext(WorkspaceArtifactId), Constant.Guids.Field.MarkupUtilityFile.File);
+
       return await ArtifactQueries.GetFileFieldContentsAsync(
-        AgentHelper.GetServicesManager(),
-        ExecutionIdentity.CurrentUser,
-        WorkspaceArtifactId,
-        Constant.Guids.Field.MarkupUtilityFile.File,
-        _markupUtilityImportJob.FileArtifactId);
+       AgentHelper.GetServicesManager(),
+       ExecutionIdentity.CurrentUser,
+       WorkspaceArtifactId,
+       markupFileFieldArtifactId,
+       _markupUtilityImportJob.FileArtifactId,
+       tempFileLocation);
     }
 
     private async Task UpdateImportJobStatusAndDetailsFieldAsync(string status, string details)
@@ -475,6 +513,12 @@ namespace MarkupUtilities.Agents
       ErrorQueries.WriteError(AgentHelper.GetServicesManager(), ExecutionIdentity.System, WorkspaceArtifactId, ex);
     }
 
+    private string GetTemporaryDirectory()
+    {
+      string tempDirectory = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
+      Directory.CreateDirectory(tempDirectory);
+      return tempDirectory;
+    }
     #endregion
   }
 }

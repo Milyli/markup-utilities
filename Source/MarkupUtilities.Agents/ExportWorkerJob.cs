@@ -184,7 +184,7 @@ namespace MarkupUtilities.Agents
           var redactionFileRdoArtifactId = await _artifactQueries.CreateMarkupUtilityFileRdoRecordAsync(_serviceMgr, ExecutionIdentity.CurrentUser, workspaceArtifactId, redactionFileName);
 
           //Attach export csv to File RDO
-          var fileArtifactId = await QueryHelper.GetWorkspaceArtifactIdByGuidAsync(AgentHelper.GetDBContext(workspaceArtifactId), Constant.Guids.Field.MarkupUtilityFile.File.ToString());
+          var fileArtifactId = await QueryHelper.GetArtifactIdByGuidAsync(AgentHelper.GetDBContext(workspaceArtifactId), Constant.Guids.Field.MarkupUtilityFile.File);
           await _artifactQueries.AttachFileToMarkupUtilityFileRecord(_serviceMgr, ExecutionIdentity.CurrentUser, workspaceArtifactId, redactionFileRdoArtifactId, exportFullFilePath, fileArtifactId);
 
           //Attach RDO File record to Export Job

@@ -2889,7 +2889,7 @@ namespace MarkupUtilities.Helpers
       await Task.Run(() => eddsDbContext.ExecuteNonQuerySQLStatement(sql));
     }
 
-    public async Task<int> GetWorkspaceArtifactIdByGuidAsync(IDBContext workspaceDbContext, string fieldGuid)
+    public async Task<int> GetArtifactIdByGuidAsync(IDBContext workspaceDbContext, Guid fieldGuid)
     {
       var sql = @"
 					SELECT ArtifactID
@@ -2898,7 +2898,7 @@ namespace MarkupUtilities.Helpers
 
       var sqlParams = new List<SqlParameter>
       {
-        new SqlParameter("@fieldGuid", SqlDbType.NVarChar) {Value = fieldGuid}
+        new SqlParameter("@fieldGuid", SqlDbType.UniqueIdentifier) {Value = fieldGuid}
       };
 
       var dataTable = await Task.Run(() => workspaceDbContext.ExecuteSqlStatementAsDataTable(sql, sqlParams));

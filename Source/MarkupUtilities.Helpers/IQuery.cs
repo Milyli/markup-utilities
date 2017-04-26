@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
 using MarkupUtilities.Helpers.Models;
@@ -156,7 +157,7 @@ namespace MarkupUtilities.Helpers
 
     Task DeleteExportResultsAsync(IDBContext eddsDbContext, List<int> recordIdList);
 
-    Task<int> GetWorkspaceArtifactIdByGuidAsync(IDBContext workspaceDbContext, string fieldGuid);
+    Task<int> GetArtifactIdByGuidAsync(IDBContext workspaceDbContext, Guid fieldGuid);
 
     Task UpdateMarkupSetMultipleChoiceFieldAsync(IDBContext workspaceDbContext, int documentArtifactId, int choiceTypeId, int choiceArtifactId);
 

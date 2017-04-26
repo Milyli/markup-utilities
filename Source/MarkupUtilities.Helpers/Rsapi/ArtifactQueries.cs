@@ -280,54 +280,37 @@ namespace MarkupUtilities.Helpers.Rsapi
       return retVal;
     }
 
-    public async Task<StreamReader> GetFileFieldContentsAsync(IServicesMgr svcMgr, ExecutionIdentity identity, int workspaceArtifactId, Guid fileFieldGuid, int fileObjectArtifactId)
+    public async Task<StreamReader> GetFileFieldContentsAsync(IServicesMgr svcMgr, ExecutionIdentity identity, int workspaceArtifactId, int fileFieldArtifactId, int fileObjectArtifactId, string tempFileLocation)
     {
-      StreamReader streamReader;
-
       try
       {
         using (var rsapiClient = svcMgr.CreateProxy<IRSAPIClient>(identity))
         {
           rsapiClient.APIOptions.WorkspaceID = workspaceArtifactId;
 
-          var servicesUrlHost = svcMgr.GetServicesURL().Host;
-          var downloadUrlRequest = new DownloadURLRequest(rsapiClient.APIOptions)
+          var fileRequest = new FileRequest(rsapiClient.APIOptions)
           {
-            BaseURI = new Uri($"http://{servicesUrlHost}"),
             Target =
-              {
-                ObjectArtifactId = fileObjectArtifactId,
-                FieldGuid = fileFieldGuid
-              }
+            {
+              WorkspaceId = workspaceArtifactId,
+              FieldId = fileFieldArtifactId,
+              ObjectArtifactId = fileObjectArtifactId
+            }
           };
 
-          DownloadURLResponse response;
           try
           {
-            response = await Task.Run(() => rsapiClient.Repositories.RDO.GetFileFieldDownloadURL(downloadUrlRequest));
+            await Task.Run(() => rsapiClient.Download(fileRequest, tempFileLocation));
           }
           catch (Exception ex)
           {
             throw new MarkupUtilityException("An error occurred calling GetFileFieldDownloadURL: {0}", ex);
           }
 
-          if (!response.Success)
-          {
-            throw new MarkupUtilityException($"An error occurred calling GetFileFieldDownloadURL: {response.Message}");
-          }
-
-          var httpClient = new HttpClient();
-          var httpResponse = httpClient.GetAsync(response.URL).Result;
-
-          if (!httpResponse.IsSuccessStatusCode)
-          {
-            throw new MarkupUtilityException($"An error occured when attempting to read the contents of the file. HTTP response not successful: {httpResponse.StatusCode}.");
-          }
-
           try
           {
-            var resultStream = httpResponse.Content.ReadAsStreamAsync().Result;
-            streamReader = new StreamReader(resultStream);
+            var sr = new StreamReader(tempFileLocation);
+            return sr;
           }
           catch (Exception ex)
           {
@@ -339,8 +322,6 @@ namespace MarkupUtilities.Helpers.Rsapi
       {
         throw new MarkupUtilityException("An error occurred when retrieving contents of the file field.", ex);
       }
-
-      return streamReader;
     }
 
     public async Task<MarkupUtilityImportJob> RetrieveImportJobAsync(IServicesMgr svcMgr, ExecutionIdentity identity, int workspaceArtifactId, int importJobArtifactId)

@@ -18,7 +18,7 @@ namespace MarkupUtilities.Helpers.Rsapi.Interfaces
     Task CreateMarkupUtilityTypeRdoRecordAsync(IServicesMgr svcMgr, ExecutionIdentity identity, int workspaceArtifactId, string name, Guid categoryChoiceGuid);
     Task<List<MarkupUtilityType>> QueryMarkupUtilityTypeRdoRecordAsync(IServicesMgr svcMgr, ExecutionIdentity identity, int workspaceArtifactId, Guid rdoGuid);
     Task<int> GetChoiceArtifactIdbyGuidAsync(IServicesMgr svcMgr, ExecutionIdentity identity, int workspaceArtifactId, Guid choiceGuid);
-    Task<StreamReader> GetFileFieldContentsAsync(IServicesMgr svcMgr, ExecutionIdentity identity, int workspaceArtifactId, Guid fileFieldGuid, int fileObjectArtifactId);
+    Task<StreamReader> GetFileFieldContentsAsync(IServicesMgr svcMgr, ExecutionIdentity identity, int workspaceArtifactId, int fileFieldArtifactId, int fileObjectArtifactId, string tempFileLocation);
     Task<MarkupUtilityImportJob> RetrieveImportJobAsync(IServicesMgr svcMgr, ExecutionIdentity identity, int workspaceArtifactId, int importJobArtifactId);
     Task<MarkupUtilityExportJob> RetrieveExportJobAsync(IServicesMgr svcMgr, ExecutionIdentity identity, int workspaceArtifactId, int exportJobArtifactId);
     Task<MarkupUtilityReproduceJob> RetrieveReproduceJobAsync(IServicesMgr svcMgr, ExecutionIdentity identity, int workspaceArtifactId, int jobArtifactId);

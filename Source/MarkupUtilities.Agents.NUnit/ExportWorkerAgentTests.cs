@@ -638,9 +638,9 @@ namespace MarkupUtilities.Agents.NUnit
     private void MockGetWorkspaceArtifactIdByGuidAsync(int rdoFileFieldArtifactId)
     {
       MockQuery
-        .Setup(x => x.GetWorkspaceArtifactIdByGuidAsync(
+        .Setup(x => x.GetArtifactIdByGuidAsync(
           It.IsAny<IDBContext>(),
-          It.IsAny<string>()))
+          It.IsAny<Guid>()))
         .Returns(Task.FromResult(rdoFileFieldArtifactId))
         .Verifiable();
     }
