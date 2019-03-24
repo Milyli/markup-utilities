@@ -40,9 +40,11 @@
       <HintPath>..\packages\Castle.Core.3.3.3\lib\net45\Castle.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="kCura.Agent, Version=8.0.326.2, Culture=neutral, processorArchitecture=AMD64">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Vendor\Relativity\kCura.Agent.dll</HintPath>
+    <Reference Include="kCura.Agent, Version=9.4.254.2, Culture=neutral, processorArchitecture=AMD64">
+      <HintPath>..\packages\Relativity.Agent.9.4.254.2\lib\kCura.Agent.dll</HintPath>
+    </Reference>
+    <Reference Include="kCura.Relativity.Client, Version=9.4.254.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Relativity.Rsapi.9.4.254.2\lib\kCura.Relativity.Client.dll</HintPath>
     </Reference>
     <Reference Include="Moq, Version=4.5.21.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
       <HintPath>..\packages\Moq.4.5.21\lib\net45\Moq.dll</HintPath>
@@ -52,9 +54,20 @@
       <HintPath>..\packages\NUnit.3.4.1\lib\net45\nunit.framework.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Relativity.API, Version=9.1.137.12, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Vendor\Relativity\Relativity.API.dll</HintPath>
+    <Reference Include="Relativity.API, Version=9.4.254.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Relativity.Api.9.4.254.2\lib\Relativity.API.dll</HintPath>
+    </Reference>
+    <Reference Include="Relativity.Kepler, Version=1.0.1.163, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Relativity.ObjectManager.9.4.254.2\lib\Relativity.Kepler.dll</HintPath>
+    </Reference>
+    <Reference Include="Relativity.Services.DataContracts, Version=9.4.254.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Relativity.ObjectManager.9.4.254.2\lib\Relativity.Services.DataContracts.dll</HintPath>
+    </Reference>
+    <Reference Include="Relativity.Services.Interfaces, Version=9.4.254.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Relativity.ObjectManager.9.4.254.2\lib\Relativity.Services.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Relativity.Services.ServiceProxy, Version=1.0.1.163, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Relativity.ObjectManager.9.4.254.2\lib\Relativity.Services.ServiceProxy.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
